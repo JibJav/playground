@@ -20,7 +20,7 @@ entity TestAlert {
 }
 
 // Use Data Transfer Objects (DTO)
- dto * with mapstruct
+ // dto * with mapstruct
 
 // Set service options to all except few
 service all with serviceImpl 
