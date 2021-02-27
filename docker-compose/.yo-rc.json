@@ -1,0 +1,15 @@
+{
+  "generator-jhipster": {
+    "deploymentType": "docker-compose",
+    "gatewayType": "zuul",
+    "monitoring": "no",
+    "directoryPath": "../",
+    "appsFolders": ["gateway", "center", "alert"],
+    "clusteredDbApps": [],
+    "consoleOptions": [],
+    "serviceDiscoveryType": "eureka",
+    "dockerRepositoryName": "javedj",
+    "dockerPushCommand": "docker push",
+    "jwtSecretKey": "MTFlYTBkMWQyNTBmMGRhOTdhOTJlY2Y5MDFkMWE1NjA5ZGEzNmNlZGFjMjFiZmFiYmVkZjU5NjIyZGM1NzNmYmJmODcwMDk3OTViMTA3YTc4MzY4NGZmODFkMjc2NGVhNWNjYg=="
+  }
+}
