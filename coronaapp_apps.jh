@@ -1,0 +1,85 @@
+application {
+  config {
+    baseName gateway,
+    packageName com.okta.developer.gateway,
+    applicationType gateway,
+    prodDatabaseType postgresql,
+    serviceDiscoveryType eureka,
+    testFrameworks [protractor]
+  }
+  entities Center, TestAlert
+}
+
+application {
+  config {
+    baseName center,
+    packageName com.okta.developer.center,
+    applicationType microservice,
+    databaseType mysql,
+    devDatabaseType mysql,
+    prodDatabaseType mysql,
+    enableHibernateCache false,
+    serverPort 8082,
+    serviceDiscoveryType eureka,
+    messageBroker kafka
+  }
+  entities 
+}
+
+application {
+  config {
+    baseName alert,
+    packageName com.okta.developer.alert,
+    applicationType microservice,
+    serverPort 8082,
+    serviceDiscoveryType eureka,
+    messageBroker kafka
+  }
+  entities TestAlert
+}
+
+enum CoronaStatus {
+  POSITIVE,
+  NEGATIVE,
+  RESULT_NOT_READY
+}
+
+entity Center {
+  name String required,
+  address String required,
+  status CoronaStatus,
+  testTimestamp Instant required,
+  updateTimestamp Instant,
+  email String required
+}
+
+entity TestAlert {
+  patientName String required,
+  coronaStatus CoronaStatus required,
+  timestamp Instant required
+}
+
+
+
+microservice Center with center
+microservice TestAlert with alert
+
+
+relationship ManyToOne {
+    Center{user(login)} to User,
+    TestAlert{center(name)} to Center
+}
+
+// Use Data Transfer Objects (DTO)
+ dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// will be created under 'docker-compose' folder
+deployment {
+  deploymentType docker-compose
+  appsFolders [gateway, center, alert]
+  dockerRepositoryName "javedj"
+  consoleOptions [zipkin]
+}

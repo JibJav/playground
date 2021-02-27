@@ -1,0 +1,26 @@
+enum CoronaStatus {
+  POSITIVE,
+  NEGATIVE,
+  RESULT_NOT_READY
+}
+
+entity Center {
+  name String required,
+  address String required,
+  status CoronaStatus,
+  testTimestamp Instant required,
+  updateTimestamp Instant,
+  email String required
+}
+
+entity TestAlert {
+  patientName String required,
+  coronaStatus String  required,
+  timestamp Instant required
+}
+
+// Use Data Transfer Objects (DTO)
+ dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
