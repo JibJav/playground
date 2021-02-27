@@ -70,7 +70,7 @@ microservice TestAlert with alert
 
 
 // Set service options to all except few
-service all with serviceImpl 
+//service all with serviceImpl 
 
 // will be created under 'docker-compose' folder
 deployment {
